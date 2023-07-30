@@ -55,7 +55,6 @@ document.querySelectorAll(`.option`).forEach((el) => {
         
         if (computerChoice == playerSelection) {
             showWinner("DRAW!")
-            return;
         } else if (computerChoice == "rock") {
             if (playerSelection == "paper") {
                 playerWin();
