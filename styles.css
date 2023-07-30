@@ -38,9 +38,22 @@ h1 {
     margin-bottom: 13px;
 }
 
+.computer_choice, .computer_points {
+    color: green;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.player_choice, .player_points {
+    color: red;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
 .advice {
     text-align: center;
     margin-bottom: 23px;
+    text-align: center;
 }
 
 .container {
@@ -77,10 +90,13 @@ h1 {
     box-shadow: 0 0 5px white, inset 0 0 5px white;
 }
 
-.red-text {
-    color: red;
-}
+@media (max-width: 500px) {
+    html {
+        font-size: 14px;
+    }
 
-.gree-text {
-    color: green;
+    .container {
+        grid-template-columns: auto;
+        grid-template-rows: repeat(3, 1fr);
+    }
 }

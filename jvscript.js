@@ -1,9 +1,11 @@
 const adviceWinner = document.querySelector(".advice");
-const computerChoice = document.querySelector(".computer_choice");
+const spanComputer = document.querySelector(".computer_choice");
+const playerChoice = document.querySelector(".player_choice");
+const spanComputerPoints = document.querySelector(".computer_points");
+const spanPlayerPoints = document.querySelector(".player_points");
 
 function getValue() {
     let randomNumber = Math.floor(Math.random() * 3) + 1;
-
     if (randomNumber == 1) {
         return "rock";
     } else if (randomNumber == 2) {
@@ -13,12 +15,34 @@ function getValue() {
     }
 }
 
+const computerPoints = [];
+const playerPoints = [];
+
+function sumArray(array) {
+    let sum = 0;
+    for (i = 0; i < array.length; i++) {
+        sum += array[i];
+    }
+    return sum;
+}
+
+
 function showWinner(winner) {
     adviceWinner.innerText = winner;
 }
 
-function showComputerChoice(choice) {
-    computerChoice.innerHTML = choice;
+function computerWin() {
+    adviceWinner.innerText = "COMPUTER WIN!"
+    computerPoints.push(1);
+    sumArray(computerPoints);
+    spanComputerPoints.innerText = sumArray(computerPoints);
+}
+
+function playerWin() {
+    adviceWinner.innerText = "PLAYER WIN!"
+    playerPoints.push(1);
+    sumArray(playerPoints);
+    spanPlayerPoints.innerText = sumArray(playerPoints);
 }
 
 document.querySelectorAll(`.option`).forEach((el) => {
@@ -26,35 +50,32 @@ document.querySelectorAll(`.option`).forEach((el) => {
         let computerChoice = getValue();
         let playerSelection = e.target.id;
 
-        if (computerChoice == "rock") {
-            showComputerChoice("ROCK");
-        } else if (computerChoice == "paper") {
-            showComputerChoice("PAPER");
-        } else {
-            showComputerChoice("SCISSORS");
-        }
+        playerChoice.innerText = playerSelection.toUpperCase();
+        spanComputer.innerText = computerChoice.toUpperCase();
         
         if (computerChoice == playerSelection) {
             showWinner("DRAW!")
             return;
         } else if (computerChoice == "rock") {
             if (playerSelection == "paper") {
-                showWinner("PLAYER WIN!")
+                playerWin();
             } else if (playerSelection == "scissors") {
-                showWinner("COMPUTER WIN")
+                computerWin();
             }
         } else if (computerChoice == "paper") {
             if (playerSelection == "scissors") {
-                showWinner("PLAYER WIN!")
+                playerWin();
             } else if (playerSelection == "rock") {
-                showWinner("COMPUTER WIN")
+                computerWin();
             }
         } else if (computerChoice == "scissors") {
             if (playerSelection == "rock") {
-                showWinner("PLAYER WIN!")
+                playerWin();
             } else if (playerSelection == "paper") {
-                showWinner("COMPUTER WIN")
+                computerWin();
             }
         }
     });
 });
+
+console.log(playerPoints);
